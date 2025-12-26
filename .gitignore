@@ -1,0 +1,10 @@
+# Ignorar archivos
+abp_db.py
+ejercicio.py
+
+# Ignorar una carpeta completa (y todo su contenido)
+.github/
+__pycache__/
+documentos/
+
+
