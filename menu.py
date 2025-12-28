@@ -11,8 +11,6 @@ def mostrar_menu():
     print("5. Listar todos los pacientes")
     print("6. Guardar en CSV")
     print("7. Cargar en CSV")
-    print("8. Agendar cita")
-    print("9. Consultar cita")
     print("0. Salir\n")
 
 
@@ -48,14 +46,11 @@ def ejecutar_menu():
         elif opcion == '7':
             archivos_csv.cargar_csv()
             salir_programa = opcion_salir()
-        elif opcion == '8':
-            crud.agendar_cita()
-        elif opcion == '9':
-            crud.consultar_cita()
         elif opcion == '0':
             print("\nHa salido exitosamente. ¡Hasta pronto!\n")
+            break
         else:
-            print("\n !!! Opción inválida.\nPor favor, selecciona una opción válida (1-9 o 0 para salir).")
+            print("\n !!! Opción inválida.\nPor favor, selecciona una opción válida (1-7 o 0 para salir).")
 
 
 # Método 'opcion_salir'. Gestiona la opción de salir o volver al menú principal antes de mostrarlo.

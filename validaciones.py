@@ -2,7 +2,7 @@
 
 # validar nombre del paciente
 def validar_nombre(nombre_input):
-    nombre = nombre_input.strip()         # Quitar espacios de la entrada y asignar nuevo argumento a variable
+    nombre = nombre_input.strip().capitalize() # Quitar espacios de la entrada y asignar nuevo argumento a variable
     if len(nombre) < 2:             # Condicional if para evaluar la cantidad de letras mínimas
         raise ValueError("El nombre debe tener al menos 2 caracteres")
     if not nombre.isalpha():        # Condicional if para evaluar si la entrada son letras
@@ -59,42 +59,3 @@ def validar_rut(rut_input):
         raise ValueError("El dígito verificador debe tener solo un carácter")
     
     return f"{numero}-{dv}"
-
-
-'''
-if len(rut) < 9:
-    raise ValueError("El RUT debe contener al menos 9 caracteres")
-if not rut[:-1].isdigit():
-    raise ValueError("El RUT debe contener solo números")
-if "-" not in rut:
-    raise ValueError("El RUT debe contener un guión")
-if not rut[-1].isdigit():
-    raise ValueError("El dígito verificador debe ser un número")
-'''   
-
-'''
-class Persona:
-    def __init__(self, nombre, edad):
-        self.nombre = nombre
-        self.edad = edad
-
-class Paciente(Persona):
-    def __init__(self, nombre, edad, rut, email):
-        super().__init__(nombre, edad)
-        self.rut = rut
-        self.email = email
-        self.historial_medico = []
-        self.citas = []
-
-    def agregar_cita(self, fecha, hora, motivo):
-        self.citas.append({"fecha": fecha, "hora": hora, "motivo": motivo})
-        return "Cita agendada exitosamente."
-
-    def ver_citas(self):
-        if not self.citas:
-            return "No tiene citas agendadas."
-        citas_str = "Citas agendadas:\n"
-        for cita in self.citas:
-            citas_str += f"- Fecha: {cita['fecha']}, Hora: {cita['hora']}, Motivo: {cita['motivo']}\n"
-        return citas_str
-'''

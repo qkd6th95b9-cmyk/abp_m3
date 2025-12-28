@@ -1,10 +1,11 @@
 # Ignorar archivos
 abp_db.py
 ejercicio.py
+documentos/pacientes_prueba.csv
 
 # Ignorar una carpeta completa (y todo su contenido)
 .github/
 __pycache__/
-documentos/
+
 
 

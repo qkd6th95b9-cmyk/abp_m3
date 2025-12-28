@@ -11,11 +11,11 @@ def guardar_csv(archivo = archivo_csv):
         return
     try:
         with open(archivo,"w",encoding = 'utf-8') as f:
-            f.write("RUT;nombre;apellido;edad;email;examenes;agenda\n") # Escribir encabezado
+            f.write("RUT;nombre;apellido;edad;email\n") # Escribir encabezado
             for paciente in pacientes:
                 rut = next(iter(paciente.keys()))
                 datos = paciente[rut]
-                f.write(f"{rut};{datos["nombre"][0]};{datos["nombre"][1]};{datos["edad"]};{datos["email"]};\n")
+                f.write(f"{rut};{datos['nombre'][0]};{datos['nombre'][1]};{datos['edad']};{datos['email']};\n")
         print("Guardado el archivo con éxito")
     except OSError as e:
         print(f"Error al escribir el archivo: {e}")
@@ -36,7 +36,7 @@ def cargar_csv(archivo = archivo_csv):
                     continue # Omitir líneas vacías
                 
                 try:
-                    rut, nombre, apellido, email, edad_str = linea.split(";")
+                    rut, nombre, apellido, edad_str, email = linea.split(";")
                     edad = int(edad_str) # Convertir edad a entero
                     
                     # podrían existir validaciones de todos los campos antes de crear un registro

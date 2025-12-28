@@ -3,8 +3,8 @@ from validaciones import validar_correo,validar_edad,validar_nombre,validar_rut
 pacientes = []
 
 def buscar_indice_por_rut(rut):
-    for indice, alumno in enumerate(pacientes):
-        if rut in alumno:
+    for indice, paciente in enumerate(pacientes):
+        if rut in paciente:
             return indice
     return -1
 
@@ -16,7 +16,6 @@ def obtener_paciente_por_rut(rut):
         return None
     return pacientes[indice][rut]
 
-
 # CRUD (create-read-update-delete)
 # Create
 def crear_paciente():
@@ -27,7 +26,6 @@ def crear_paciente():
         apellido = pedir_dato("Ingrese el apellido: ",validar_nombre).strip()        
         edad = pedir_dato("Ingrese la edad: ",validar_edad)
         email = pedir_dato("Ingrese el email: ",validar_correo).strip()
-        #examenes = []
         nuevo_paciente = {
             rut:{
                 "nombre":(nombre,apellido),
@@ -41,17 +39,20 @@ def crear_paciente():
  # Mensaje de confirmación
     print(f'\nDatos de {nombre} {apellido} agregados exitosamente.')
 
-
 # Read (by_id, all)
 def listar_todos():
-    for indice, paciente in enumerate(paciente):
-        rut=next(iter(paciente.keys()))
-        datos=paciente[rut]
-        print(f"\nPaciente con el rut: {rut}")
-        print(f"Nombre: {datos["nombre"][0]}")
-        print(f"Apellido: {datos["nombre"][1]}")
-        print(f"Correo: {datos["email"]}")
-        print(f"Edad: {datos["edad"]}")
+    print("\n== Listado de todos los pacientes registrados ==\n")
+    if not pacientes:
+        print("No hay pacientes registrados.")
+        return
+    for _, paciente in enumerate(pacientes):
+        rut = next(iter(paciente.keys()))
+        datos = paciente[rut]
+        print(f"Paciente con el rut: {rut}")
+        print(f"Nombre completo: {datos['nombre'][0]} {datos['nombre'][1]}")
+        print(f"Correo: {datos['email']}")
+        print(f"Edad: {datos['edad']}")
+        print("-" * 30)
 
 def buscar_paciente():
     try:
@@ -69,7 +70,6 @@ def buscar_paciente():
     except ValueError as e:
         print(f"Error:{e}")
 
-
 # Update
 def editar_paciente():
     try:
@@ -79,17 +79,11 @@ def editar_paciente():
             print("No existe paciente con ese rut")
             return
         datos = pacientes[indice][rut]
-        ''' esto es lo que obtengo en datos
-        { "nombre":"Pedro",
-        "email":"pedro@gmail.com",
-        "edad":25
-        }
-        '''
         print("Deje en blanco para mantener el valor actual.")
-        print(f"Nombre: {datos["nombre"][0]}")
-        print(f"Apellido: {datos["nombre"][1]}")
-        print(f"Edad: {datos["edad"]}")
-        print(f"Email: {datos["email"]}")
+        print(f"Nombre: {datos['nombre'][0]}")
+        print(f"Apellido: {datos['nombre'][1]}")
+        print(f"Edad: {datos['edad']}")
+        print(f"Email: {datos['email']}\n")
         nuevo_nombre = input("Nuevo nombre: ")
         nuevo_apellido = input("Nuevo apellido: ")
         nueva_edad = input("Nueva edad: ")
@@ -143,6 +137,7 @@ def cargar_todos_pacientes(nuevos_pacientes):
     global pacientes
     pacientes = list(nuevos_pacientes)
 
+# Función genérica para pedir y validar datos
 def pedir_dato(mensaje, funcion_validacion):
     # Solicita un dato al usuario y lo valida repetidamente hasta que sea correcto
     while True:
